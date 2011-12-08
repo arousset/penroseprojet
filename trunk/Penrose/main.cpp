@@ -18,10 +18,10 @@ static float ry = 513.5F;
 static float rz = 0.0F;
 
 // Couleurs
-static const float vert[]        = { 0.0F,1.0F,0.0F,1.0F };
-static const float bleu[]        = { 0.0F,0.0F,1.0F,1.0F };
-static const float gris[]   = { 0.8F,0.8F,0.8F,1.0F };
-static const float blanc[]   = { 1.0F,1.0F,1.0F,1.0F };
+static const float vert[] = { 0.0F,1.0F,0.0F,1.0F };
+static const float bleu[] = { 0.0F,0.0F,1.0F,1.0F };
+static const float gris[] = { 0.8F,0.8F,0.8F,1.0F };
+static const float blanc[] = { 1.0F,1.0F,1.0F,1.0F };
 static const float rouge[] = { 1.0F, 0.0F, 0.0F, 1.0F };
 static const float defaultDiff[] = { 0.8F,0.8F,0.8F,1.0F };
 
@@ -29,7 +29,7 @@ static const float defaultDiff[] = { 0.8F,0.8F,0.8F,1.0F };
 static int aff = 1;
 
 // Vitesse de la balle
-float speed = 0.0006;
+float speed = 0.005;
 
 // Variables utiles
 float tmp = -0.25;
@@ -44,7 +44,7 @@ float angle = 0.0;
 static int px = 0;
 static int py = 0;
 
-// Fonction de lecture de texture au format ;raw
+// Fonction de lecture de texture au format .raw
 GLbyte *lireImageRaw(int tx,int ty,char *filename) {
   GLbyte *img = NULL;
   FILE *file = fopen(filename,"rb");
@@ -198,7 +198,7 @@ void configurationLumieres(void) {
 
 }
 
-// Changement de la taille de la fenêtre
+// Changement de la taille de la fenêtre et placement de la caméra de visualisation en projection orthographique
 void reshape(int w,int h) {
         glViewport(0,0,w,h);
         glMatrixMode(GL_PROJECTION);
@@ -339,6 +339,13 @@ void keyboard(unsigned char key,int x,int y) {
                 break;
         case 'p' :
                 pause = !pause;
+                break;
+		case 'a' :
+				if(speed > 0.01)
+					speed -= 0.01;
+                break;
+		case 'z' :
+                speed += 0.01;
                 break;
         case 0x1B :
                 exit(0);
