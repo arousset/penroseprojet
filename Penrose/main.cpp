@@ -43,6 +43,7 @@ static float posz = 0.0;
 float angle = 0.0;
 static int px = 0;
 static int py = 0;
+bool move = false;
 
 // Fonction de lecture de texture au format .raw
 GLbyte *lireImageRaw(int tx,int ty,char *filename) {
@@ -352,14 +353,37 @@ void keyboard(unsigned char key,int x,int y) {
                 break; }
 }
 
-// Permet de détecter les évennements souris
-void mousemove(int x, int y)
+void motion(int x,int y)
 {
-		ry += (x-px);
-		rx -= (y-py);
-		px = x;
-		py = y;
-		glutPostRedisplay();
+  if (move)
+  {
+    ry += (x-px);
+    rx += (y-py);
+    px = x;
+    py = y;
+    glutPostRedisplay();
+  }
+}
+
+void mouse(int bouton,int etat,int x,int y) {
+  if (bouton == GLUT_LEFT_BUTTON)
+  {
+    if (etat == GLUT_UP )
+      if (move)
+	  {
+        move = false;
+        px = x;
+        py = y;
+        glutPostRedisplay();
+	  }
+    if(etat == GLUT_DOWN)
+	{
+      move = true;
+      px = x;
+      py = y;
+      glutPostRedisplay();
+	}
+  }
 }
 
 int main(int argc,char **argv) {
@@ -373,7 +397,8 @@ int main(int argc,char **argv) {
         glutSpecialFunc(special);
         glutReshapeFunc(reshape);
         glutDisplayFunc(display);
-        glutMotionFunc(mousemove);
+        glutMotionFunc(motion);
+		glutMouseFunc(mouse);
         glutIdleFunc(idle);
         glutMainLoop();
         return(0);
