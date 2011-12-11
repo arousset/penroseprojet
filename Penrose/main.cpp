@@ -274,16 +274,12 @@ void idle(void) {
         {
 			if(tmp2 <= -4.0)
 			{
-				tmp = -0.25;
+				tmp = 0;
                 tmp2 = 0.0;
                 cptface = 0;
-                posx = -1.0;
-                posy = 0.8;
-                posz = 0.0;
 			}
 			else if(tmp2 <= -3.0 && !cheat)
 			{
-				//tmp = 0.0;
 				cheat = true;
                 posy = 1.0;
 				posx = -1.0;
