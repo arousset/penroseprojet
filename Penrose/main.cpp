@@ -209,7 +209,7 @@ void reshape(int w,int h) {
 		if(w > h)
 			glOrtho(-r2*w/h, r2*w/h, -r2, r2, -r, r);
 		else
-			glOrtho(-r2, r2, -r2*w/h, r2*w/h, -r, r);
+			glOrtho(-r2, r2, -r2*h/w, r2*h/w, -r, r);
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
 }
