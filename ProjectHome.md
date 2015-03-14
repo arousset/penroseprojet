@@ -1,0 +1,1 @@
+Modélisation de l'escalier de Penrose en OpenGL.
